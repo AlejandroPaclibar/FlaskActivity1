@@ -1,7 +1,7 @@
 @extends('templates.base')
 
 @section('content')
-    <div class="d-flex justify-content-between bg-gray-100 p-2 align-items-center w-100">
+    <div class="d-flex justify-content-between bg-gray-300 p-2 align-items-center w-100">
         <div>
             <h1 class="text-4xl">Products</h1>
         </div>
@@ -29,18 +29,22 @@
                                     <div class="mb-3">
                                         <label for="name" class="form-label">Name</label>
                                         <input type="text" class="form-control" id="name" name="name" >
+                                        <div id = "name_error" hx-swap-oob="true"> </div>
                                     </div>
                                     <div class="mb-3">
                                         <label for="description" class="form-label">Description</label>
                                         <textarea class="form-control" id="description" name="description" ></textarea>
+                                        <div id = "desc_error" hx-swap-oob="true"> </div>
                                     </div>
                                     <div class="mb-3">
                                         <label for="price" class="form-label">Price</label>
                                         <input type="number" class="form-control" id="price" name="price" >
+                                        <div id = "price_error" hx-swap-oob="true"> </div>
                                     </div>
                                     <div class="mb-3">
                                         <label for="quantity" class="form-label">Quantity</label>
                                         <input type="number" class="form-control" id="quantity" name="quantity" >
+                                        <div id = "qty_error" hx-swap-oob="true"> </div>
                                     </div>
                                 </div>
                                 <div id="addProductMessage" hx-swap-oob="true"></div>
@@ -52,6 +56,14 @@
                         </div>
                     </div>
                     <script>
+                        function resetModal() {
+                            document.getElementById('name_error').innerHTML = '';
+                            document.getElementById('desc_error').innerHTML = '';
+                            document.getElementById('price_error').innerHTML = '';
+                            document.getElementById('qty_error').innerHTML = '';
+                            document.getElementById('addProductMessage').innerHTML = '';
+                        }
+
                         document.getElementById('staticBackdrop').addEventListener('hidden.bs.modal', function() {
                             document.getElementById('addProductMessage').innerHTML = '';
                             document.getElementById('closeButton').style.display = 'none';
@@ -66,7 +78,7 @@
             </div>
         </div>
     </div>
-    <div id="products_list" class="p-5 bg-gray-100" hx-get="/api/products" hx-trigger="load delay:500ms" hx-swap="innerHTML">
+    <div id="products_list" class="p-5 bg-gray-200" hx-get="/api/products" hx-trigger="load delay:500ms" hx-swap="innerHTML">
         <!-- Product list will be loaded here -->
     </div>
 @endsection
